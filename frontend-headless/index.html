@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>CMS Headless IA</title>
+</head>
+<body>
+
+  <h1>Proyectos de IA - CMS Headless</h1>
+  <div id="posts"></div>
+
+  <script>
+fetch('https://corsproxy.io/?' + encodeURIComponent('https://campusmj.great-site.net/wordpress/?rest_route=/wp/v2/posts'))
+  .then(response => response.json())
+  .then(data => {
+    const contenedor = document.getElementById('posts');
+    contenedor.innerHTML = '';
+
+    data.forEach(post => {
+      contenedor.innerHTML += `
+        <div>
+          <h2>${post.title.rendered}</h2>
+          <div>${post.excerpt.rendered}</div>
+        </div>
+      `;
+    });
+  })
+  .catch(error => {
+    console.log(error);
+    document.getElementById('posts').innerHTML = 'Error al cargar publicaciones';
+  });
+</script>
+
+</body>
+</html>
