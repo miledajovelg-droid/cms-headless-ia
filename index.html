@@ -7,29 +7,36 @@
 <body>
 
   <h1>Proyectos de IA - CMS Headless</h1>
+
   <div id="posts"></div>
 
   <script>
-fetch('https://corsproxy.io/?' + encodeURIComponent('https://campusmj.great-site.net/wordpress/?rest_route=/wp/v2/posts'))
-  .then(response => response.json())
-  .then(data => {
-    const contenedor = document.getElementById('posts');
-    contenedor.innerHTML = '';
+    const posts = [
+      {
+        title: "Chatbots con IA",
+        excerpt: "Desarrollo de asistentes virtuales para atención al cliente."
+      },
+      {
+        title: "Proyecto de IA para Educación",
+        excerpt: "Sistema inteligente para personalizar el aprendizaje de estudiantes universitarios."
+      },
+      {
+        title: "IA aplicada a Salud",
+        excerpt: "Uso de inteligencia artificial para diagnóstico médico automatizado."
+      }
+    ];
 
-    data.forEach(post => {
+    const contenedor = document.getElementById("posts");
+
+    posts.forEach(post => {
       contenedor.innerHTML += `
-        <div>
-          <h2>${post.title.rendered}</h2>
-          <div>${post.excerpt.rendered}</div>
+        <div style="border:1px solid #ccc; padding:15px; margin:15px 0;">
+          <h2>${post.title}</h2>
+          <p>${post.excerpt}</p>
         </div>
       `;
     });
-  })
-  .catch(error => {
-    console.log(error);
-    document.getElementById('posts').innerHTML = 'Error al cargar publicaciones';
-  });
-</script>
+  </script>
 
 </body>
 </html>
